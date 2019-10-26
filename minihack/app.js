@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({}));
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/newGame.html");
@@ -62,6 +63,20 @@ app.get("/game/:gameId", (req, res) => {
     }
 });
 
+app.post("/add-new-row", (req, res) => {
+    const gameList = JSON.parse(fs.readFileSync("./games.json", "utf-8"));
+    const gameId = req.body.gameId;
+
+    for (let i = 0; i < gameList.length; i++) {
+        if (gameList[i].id == gameId) {
+            gameList[i].rows.push([0,0,0,0]);
+        }
+    };
+
+    fs.writeFileSync("./games.json", JSON.stringify(gameList));
+    res.send("Add row success!");
+});
+
 app.post("/create-game", (req, res) => {
     const gameList = JSON.parse(fs.readFileSync("./games.json", "utf-8"));
 
@@ -82,6 +97,8 @@ app.post("/create-game", (req, res) => {
     fs.writeFileSync("./games.json", JSON.stringify(gameList));
     res.redirect(`/game/${newGameId}`);
 });
+
+app.use(express.static("public"));
 
 app.listen(6969, (err) => {
     if (err) console.log(err)
