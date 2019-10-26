@@ -18,7 +18,7 @@ app.get('/', (request, response) => {
         const htmlWithData = questionDetailHTML
             .replace("question_content", randomQuestion.content)
             .replace("question_index", randomIndex)
-            .replace("question_index", randomIndex);
+            .replace("question_index_2", randomIndex);
     
         response.send(htmlWithData);
     } else {
