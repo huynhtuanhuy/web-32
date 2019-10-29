@@ -15,6 +15,16 @@ mongoose.connect(
     }
 );
 
+const questionModel = require('./models/question');
+
+questionModel.find({
+    // query
+}).then(data => {
+    console.log("Data: ", data);
+}).catch(error => {
+    console.log(error);
+});
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -82,19 +92,15 @@ app.get('/question/:questionIndex', (request, response) => {
 
 // backend router
 app.post('/add-question', (request, response) => {
-    const fileData = fs.readFileSync("questions.json", "utf-8");
-    const questionList = JSON.parse(fileData);
     const questionContent = request.body.question;
 
-    questionList.push({
+    questionModel.create({
         content: questionContent,
-        yes: 0,
-        no: 0,
+    }).then(questionCreated => {
+        response.redirect(`/question/${questionCreated._id}`);
+    }).catch(error => {
+        console.log(error);
     });
-
-    fs.writeFileSync("questions.json", JSON.stringify(questionList));
-
-    response.redirect(`/question/${questionList.length - 1}`);
 });
 
 app.listen(6969, (err) => {
