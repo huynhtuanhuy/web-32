@@ -1,6 +1,19 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+mongoose.connect(
+    'mongodb://localhost/quyetde-32',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    },
+    (err) => {
+        if (err) console.log(err)
+        else console.log("DB connect success!!");
+    }
+);
 
 const app = express();
 
