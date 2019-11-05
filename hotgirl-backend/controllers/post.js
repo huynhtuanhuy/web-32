@@ -5,7 +5,21 @@ function create(post) {
 }
 
 function getList() {
-    return postModel.find({}).populate('author');
+    return postModel.find({}, {
+        'author': 1,
+        'active': 1,
+        'image': 1,
+        'title': 1,
+        'content': 1,
+    })
+        .populate(
+            'author',
+            {
+                'name': 1,
+                'username': 1,
+            }
+        )
+        .populate('active');
 }
 
 function getById(postId) {

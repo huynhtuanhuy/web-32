@@ -1,6 +1,13 @@
+const bcrypt = require('bcrypt');
 const userModel = require('../models/user');
 
 function create(user) {
+    const plainPassword = user.password;
+    const salt = bcrypt.genSaltSync(12);
+    const hashPassword = bcrypt.hashSync(plainPassword, salt);
+
+    user.password = hashPassword;
+
     return userModel.create(user);
 }
 
