@@ -8,7 +8,7 @@ const ActiveController = require('../controllers/active');
 PostRouter.post('/', (req, res) => {
     const { image, title, content, author } = req.body;
 
-    ActiveController.create().then(activeCreated => {
+    ActiveController.create({}).then(activeCreated => {
         PostController.create({ image, title, content, author, active: activeCreated._id })
             .then(postCreated => {
                 res.json({
