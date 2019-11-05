@@ -20,8 +20,12 @@ mongoose.connect(
 );
 
 const UserRouter = require('./routers/user');
+const PostRouter = require('./routers/post');
+const ActiveRouter = require('./routers/active');
 
 app.use('/api/users', UserRouter);
+app.use('/api/posts', PostRouter);
+app.use('/api/actives', ActiveRouter);
 
 app.listen(6969, (err) => {
     if (err) console.log(err)

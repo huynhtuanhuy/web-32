@@ -2,7 +2,6 @@ const express = require('express');
 const UserRouter = express.Router();
 
 const UserController = require('../controllers/user');
-const ActiveController = require('../controllers/active');
 
 //Create
 UserRouter.post('/', (req, res) => {
