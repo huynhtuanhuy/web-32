@@ -4,13 +4,11 @@ import { Button } from 'reactstrap';
 import logo from './logo.svg';
 import './App.css';
 
-import Navbar from './components/Navbar';
+import Home from './containers/Home';
 
 function App() {
   return (
-    <div>
-      <Navbar />
-    </div>
+    <Home />
   );
 }
 

@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session')
+const cors = require('cors');
+const session = require('express-session');
 
 const app = express();
+
+app.use(cors({ origin: ['http://localhost:3000'] }));
 
 app.use(session({
     secret: 'xjnCh40c4CpAn',
