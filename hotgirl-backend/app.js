@@ -19,6 +19,7 @@ app.use(bodyParser.json({}));
 
 app.use((req, res, next) => {
     console.log(req.sessionID);
+    console.log(req.session);
     next();
 });
 
@@ -37,10 +38,12 @@ mongoose.connect(
 const UserRouter = require('./routers/user');
 const PostRouter = require('./routers/post');
 const ActiveRouter = require('./routers/active');
+const AuthRouter = require('./routers/auth');
 
 app.use('/api/users', UserRouter);
 app.use('/api/posts', PostRouter);
 app.use('/api/actives', ActiveRouter);
+app.use('/api/auth', AuthRouter);
 
 app.listen(6969, (err) => {
     if (err) console.log(err)

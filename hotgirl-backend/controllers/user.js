@@ -27,7 +27,12 @@ function remove(userId) {
     return userModel.findByIdAndRemove(userId);
 }
 
+function getOne(query) {
+    return userModel.findOne(query);
+}
+
 module.exports = {
+    getOne,
     update,
     remove,
     create,
