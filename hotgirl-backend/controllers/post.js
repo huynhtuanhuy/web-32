@@ -11,6 +11,7 @@ function getList() {
         'image': 1,
         'title': 1,
         'content': 1,
+        'createdAt': 1,
     })
         .populate(
             'author',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Col, Row } from 'reactstrap';
 import axios from 'axios';
 
 export default class ListPost extends Component {
@@ -25,13 +26,33 @@ export default class ListPost extends Component {
         });
     }
 
+    renderListPost = () => {
+        const { listPost } = this.state;
+
+        return listPost.map(post => {
+            return (
+                <Col md="3">
+                    <img src={post.image} />
+                    <ul>
+                        <li>View: {post.active.views}</li>
+                        <li>Date: {post.createdAt}</li>
+                        <li>Like: {post.active.likes}</li>
+                    </ul>
+                    <h3>{post.title}</h3>
+                    <span>{post.author.name}</span>
+                    <p>{post.content}</p>
+                </Col>
+            );
+        });
+    }
+
     render() {
         console.log("Render");
 
         return (
-            <div>
-                List post length: {this.state.listPost.length}
-            </div>
+            <Row>
+                {this.renderListPost()}
+            </Row>
         )
     }
 }
