@@ -24,7 +24,15 @@ function getList() {
 }
 
 function getById(postId) {
-    return postModel.findById(postId);
+    return postModel.findById(postId)
+        .populate(
+            'author',
+            {
+                'name': 1,
+                'username': 1,
+            }
+        )
+        .populate('active');
 }
 
 function update(postId, updateData) {

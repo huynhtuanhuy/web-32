@@ -1,15 +1,37 @@
-import React from 'react';
-import { Button } from 'reactstrap';
+import React, { Component } from 'react';
+import axios from 'axios';
 
 import logo from './logo.svg';
 import './App.css';
 
-import Home from './containers/Home';
+import Router from './Router';
+import Navbar from './components/Navbar';
 
-function App() {
-  return (
-    <Home />
-  );
+class App extends Component {
+  state = {
+    user: null,
+  }
+
+  componentDidMount() {
+    axios({
+      url: 'http://localhost:6969/api/auth/check',
+      method: 'GET',
+      withCredentials: true,
+    }).then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <Router />
+      </div>
+    );
+  }
 }
 
 export default App;

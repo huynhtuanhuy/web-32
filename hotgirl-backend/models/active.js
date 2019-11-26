@@ -16,10 +16,10 @@ const CommentSchema = new Schema({
 });
 
 const ActiveSchema = new Schema({
-    likes: {
-        type: Number,
-        default: 0
-    },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     comments: [CommentSchema],
     views: {
         type: Number,

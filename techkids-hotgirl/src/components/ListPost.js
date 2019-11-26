@@ -32,15 +32,19 @@ export default class ListPost extends Component {
         return listPost.map(post => {
             return (
                 <Col md="3">
-                    <img src={post.image} />
-                    <ul>
-                        <li>View: {post.active.views}</li>
-                        <li>Date: {post.createdAt}</li>
-                        <li>Like: {post.active.likes}</li>
-                    </ul>
-                    <h3>{post.title}</h3>
-                    <span>{post.author.name}</span>
-                    <p>{post.content}</p>
+                    <a href={"/post/" + post._id}>
+                        <img style={{
+                            maxWidth: '100%',
+                        }} src={post.image} />
+                        <ul>
+                            <li>View: {post.active.views}</li>
+                            <li>Date: {post.createdAt}</li>
+                            <li>Like: {post.active.likes}</li>
+                        </ul>
+                        <h3>{post.title}</h3>
+                        <span>{post.author.name}</span>
+                        <p>{post.content}</p>
+                    </a>
                 </Col>
             );
         });
